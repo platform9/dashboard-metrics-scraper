@@ -8,6 +8,11 @@ FROM golang:${GO_VERSION}-stretch AS builder
 ARG GOARCH=amd64
 ARG GOOS=linux
 
+# Update stretch repositories
+RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
+           -e 's|security.debian.org|archive.debian.org/|g' \
+           -e '/stretch-updates/d' /etc/apt/sources.list
+
 # Install the Certificate-Authority certificates for the app to be able to make
 # calls to HTTPS endpoints.
 RUN apt-get update && \
@@ -23,10 +28,10 @@ COPY ./ ./
 RUN echo "Building for $GOARCH" \
     && mkdir -p ${GOPATH}/src/github.com/kubernetes-sigs \
     && ln -sf `pwd` ${GOPATH}/src/github.com/kubernetes-sigs/dashboard-metrics-scraper \
-    && GOARCH=${GOARCH} hack/build.sh 
+    && GOARCH=${GOARCH} hack/build.sh
 
 # Create a nonroot user for final image
-RUN useradd -u 10001 nonroot 
+RUN useradd -u 10001 nonroot
 
 # Final stage: the running container.
 FROM scratch AS final
