@@ -2,7 +2,7 @@
 BINARY := metrics-scraper
 CGO_ENABLED := 0
 DOCKERFILE := Dockerfile
-registry_url := docker.io
+registry_url := quay.io
 image_name := $(registry_url)/platform9/dashboard-metrics-scraper
 UPSTREAM_VERSION := $(shell git describe --tags HEAD | sed 's/-.*//')
 image_tag := $(UPSTREAM_VERSION)-pmk-$(TEAMCITY_BUILD_ID)
