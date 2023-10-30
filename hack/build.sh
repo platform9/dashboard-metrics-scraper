@@ -60,6 +60,7 @@ else
 echo "Build script building for ${GOARCH}";
 
 go build \
+-buildvcs=false \
 -tags netgo \
 -installsuffix 'static,netgo' \
 -ldflags '-extldflags "-static"' \
