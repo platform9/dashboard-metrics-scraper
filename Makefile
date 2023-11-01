@@ -7,14 +7,6 @@ image_name := $(registry_url)/platform9/dashboard-metrics-scraper
 UPSTREAM_VERSION := $(shell git describe --tags HEAD | sed 's/-.*//')
 image_tag := $(UPSTREAM_VERSION)-pmk-$(TEAMCITY_BUILD_ID)
 PF9_TAG := $(image_name):$(image_tag)
-DOCKERARGS :=
-
-ifdef HTTP_PROXY
-	DOCKERARGS += --build-arg http_proxy=$(HTTP_PROXY)
-endif
-ifdef HTTPS_PROXY
-	DOCKERARGS += --build-arg https_proxy=$(HTTPS_PROXY)
-endif
 
 .PHONY: build-image
 pf9-image: Dockerfile
