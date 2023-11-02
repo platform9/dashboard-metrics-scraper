@@ -2,6 +2,9 @@
 
 Small binary to scrape and store a small window of metrics from the Metrics Server in Kubernetes.
 
+## This is a forked upstream repository [https://github.com/kubernetes-sigs/dashboard-metrics-scraper], which is archived now. Moved to [https://github.com/kubernetes/dashboard/tree/master/modules/metrics-scraper]. Forked this for resolving security vulnerabilities.
+
+
 ## Command-Line Arguments
 | Flag  | Description  | Default  |
 |---|---|---|
